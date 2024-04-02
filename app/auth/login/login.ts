@@ -1,7 +1,7 @@
 "use server";
 
-import { FormError } from "@/app/common/form-error.interface";
-import { post } from "@/app/util/fetch";
+import { FormError } from "@/app/common/interfaces/form-error.interface";
+import { post } from "@/app/common/util/fetch";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

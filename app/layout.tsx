@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import darkTheme from "./dark.theme";
+import Header from "./header/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={darkTheme}>
             <CssBaseline />
+            <Header />
             <Container>{children}</Container>
           </ThemeProvider>
         </AppRouterCacheProvider>
