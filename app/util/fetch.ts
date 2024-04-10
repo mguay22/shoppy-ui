@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-import { PostOptions } from "../common/post-options.interface";
 import { API_URL } from "../constants/api";
 import { getErrorMessage } from "./errors";
 
@@ -7,11 +6,7 @@ const getHeaders = () => ({
   Cookie: cookies().toString(),
 });
 
-export const post = async (
-  path: string,
-  formData: FormData,
-  options?: PostOptions
-) => {
+export const post = async (path: string, formData: FormData) => {
   const res = await fetch(`${API_URL}/${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", ...getHeaders() },
@@ -21,9 +16,7 @@ export const post = async (
   if (!res.ok) {
     return { error: getErrorMessage(parsedRes) };
   }
-  if (options?.returnRes) {
-    return res;
-  }
+  return { error: "" };
 };
 
 export const get = async (path: string) => {

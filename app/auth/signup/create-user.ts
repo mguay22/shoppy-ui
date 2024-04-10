@@ -8,9 +8,9 @@ export default async function createUser(
   _prevState: FormError,
   formData: FormData
 ) {
-  const error = await post("users", formData);
+  const { error } = await post("users", formData);
   if (error) {
-    return error;
+    return { error };
   }
   redirect("/");
 }

@@ -1,17 +1,28 @@
 "use server";
 
-import { FormError } from "@/app/common/form-error.interface";
-import { post } from "@/app/util/fetch";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { FormError } from "@/app/common/form-error.interface";
+import { API_URL } from "@/app/constants/api";
+import { getErrorMessage } from "@/app/util/errors";
 
 export default async function login(_prevState: FormError, formData: FormData) {
-  const errorOrRes = await post("auth/login", formData, { returnRes: true });
-  if (errorOrRes && "error" in errorOrRes) {
-    return errorOrRes;
+  const res = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(Object.fromEntries(formData)),
+  });
+  const parsedRes = await res.json();
+  if (!res.ok) {
+    return { error: getErrorMessage(parsedRes) };
   }
-  const setCookieHeader = errorOrRes?.headers.get("Set-Cookie");
+  setAuthCookie(res);
+  redirect("/");
+}
+
+const setAuthCookie = (response: Response) => {
+  const setCookieHeader = response.headers.get("Set-Cookie");
   if (setCookieHeader) {
     const token = setCookieHeader.split(";")[0].split("=")[1];
     cookies().set({
@@ -22,5 +33,4 @@ export default async function login(_prevState: FormError, formData: FormData) {
       expires: new Date(jwtDecode(token).exp! * 1000),
     });
   }
-  redirect("/");
-}
+};
