@@ -27,7 +27,7 @@ export default async function RootLayout({
         <Providers authenticated={isAuthenticated}>
           <CssBaseline />
           <Header logout={logout} />
-          <Container>{children}</Container>
+          <Container className="mt-10">{children}</Container>
         </Providers>
       </body>
     </html>
