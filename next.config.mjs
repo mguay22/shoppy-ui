@@ -5,6 +5,9 @@ const nextConfig = {
       {
         hostname: "localhost",
       },
+      {
+        hostname: "backend.shoppy-app.com"
+      }
     ],
   },
 };
