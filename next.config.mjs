@@ -6,7 +6,7 @@ const nextConfig = {
         hostname: "localhost",
       },
       {
-        hostname: "backend.shoppy-app.com"
+        hostname: process.env.PRODUCT_IMAGE_HOST
       }
     ],
   },

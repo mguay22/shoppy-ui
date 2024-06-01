@@ -1,5 +1,3 @@
-import { API_URL } from "../common/constants/api";
-
 export const getProductImage = (productId: number) => {
-  return `${API_URL}/images/products/${productId}.jpg`;
+  return `${process.env.NEXT_PUBLIC_PRODUCT_IMAGE_URL}/${productId}.jpg`;
 };
