@@ -74,24 +74,24 @@ export default function CreateProductModal({
               label="Name"
               variant="outlined"
               required
-              helperText={response??.error}
-              error={!!response??.error}
+              helperText={response?.error}
+              error={!!response?.error}
             />
             <TextField
               name="description"
               label="Description"
               variant="outlined"
               required
-              helperText={response??.error}
-              error={!!response??.error}
+              helperText={response?.error}
+              error={!!response?.error}
             />
             <TextField
               name="price"
               label="Price"
               variant="outlined"
               required
-              helperText={response??.error}
-              error={!!response??.error}
+              helperText={response?.error}
+              error={!!response?.error}
             />
             <Button
               component="label"
