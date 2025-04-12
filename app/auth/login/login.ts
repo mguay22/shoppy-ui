@@ -25,11 +25,11 @@ export default async function login(
   redirect("/");
 }
 
-const setAuthCookie = (response: Response) => {
+const setAuthCookie = async (response: Response) => {
   const setCookieHeader = response.headers.get("Set-Cookie");
   if (setCookieHeader) {
     const token = setCookieHeader.split(";")[0].split("=")[1];
-    cookies().set({
+    (await cookies()).set({
       name: AUTHENTICATION_COOKIE,
       value: token,
       secure: true,
