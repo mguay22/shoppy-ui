@@ -18,7 +18,6 @@ export default async function login(
     body: JSON.stringify(Object.fromEntries(formData)),
   });
   const parsedRes = await res.json();
-  console.log(parsedRes)
   if (!res.ok) {
     return { error: getErrorMessage(parsedRes) };
   }
