@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import authenticated from "./app/auth/actions/authenticated";
 import { unauthenticatedRoutes } from "./app/common/constants/routes";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   if (
     !(await authenticated()) &&
     !unauthenticatedRoutes.some((route) =>

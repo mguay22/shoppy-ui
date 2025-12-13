@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import getProduct from "./get-product";
 import Image from "next/image";
 import { getProductImage } from "../product-image";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import Checkout from "@/app/checkout/checkout";
 
 type SingleProductProps = {

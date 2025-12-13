@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { getHeaders, post } from "../../common/util/fetch";
 import { API_URL } from "@/app/common/constants/api";
 
@@ -10,7 +10,7 @@ export default async function createProduct(formData: FormData) {
   if (productImage instanceof File && !response.error) {
     await uploadProductImage(response.data.id, productImage);
   }
-  revalidateTag("products");
+  revalidatePath("/");
   return response;
 }
 
@@ -20,6 +20,6 @@ async function uploadProductImage(productId: number, file: File) {
   await fetch(`${API_URL}/products/${productId}/image`, {
     body: formData,
     method: "POST",
-    headers: getHeaders(),
+    headers: await getHeaders(),
   });
 }

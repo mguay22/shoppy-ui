@@ -18,15 +18,12 @@ export default async function login(
     body: JSON.stringify(Object.fromEntries(formData)),
   });
   const parsedRes = await res.json();
+  console.log(parsedRes)
   if (!res.ok) {
     return { error: getErrorMessage(parsedRes) };
   }
-  setAuthCookie(res);
-  redirect("/");
-}
 
-const setAuthCookie = async (response: Response) => {
-  const setCookieHeader = response.headers.get("Set-Cookie");
+  const setCookieHeader = res.headers.get("Set-Cookie");
   if (setCookieHeader) {
     const token = setCookieHeader.split(";")[0].split("=")[1];
     (await cookies()).set({
@@ -37,4 +34,6 @@ const setAuthCookie = async (response: Response) => {
       expires: new Date(jwtDecode(token).exp! * 1000),
     });
   }
-};
+
+  redirect("/");
+}
